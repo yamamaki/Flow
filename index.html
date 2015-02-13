@@ -1,0 +1,28 @@
+<DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <title>Flow</title>
+        <link rel="stylesheet" href="./css/site.css">
+    </head>
+    <body>
+        <canvas id="flow"></canvas>
+        <script src="./js/jquery.js"></script> 
+        <script src="./js/flow.js"></script>
+        <script>
+            var canvas = document.getElementById("flow");
+            var ctx = canvas.getContext("2d");
+            
+            /** parameters config **/
+            var padding = 100;
+            var width = canvas.width;
+            var height = canvas.height;
+
+            var flow = new Flow(canvas);
+            flow.n_row = 4;
+            flow.n_col = 6;
+            flow.n_line = 5;
+        </script>
+    </body>
+</html>
+
