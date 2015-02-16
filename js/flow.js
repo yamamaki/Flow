@@ -6,13 +6,13 @@ var per_y = undefined;
 var bp = [];
 var ep_pair = [];
 var background = "#065688";
-var dir = [[0,1],[0,-1],[1,0],[-1,0],[1,1],[1,-1],[-1,1],[-1,-1]];
+var dir = [[0,1],[0,-1],[1,0],[-1,0],[1,1],[-1,-1]];
 var default_settings = {
     "width": undefined,
     "height": undefined,
-    "num_of_row": 2,
-    "num_of_col": 2,
-    "num_of_line": 2,
+    "num_of_row": 3,
+    "num_of_col": 3,
+    "num_of_line": 3,
     "max_vv": 1,
     "max_vc": 1,
     "max_z": 100,
@@ -130,8 +130,8 @@ function get_endpoint_pair(row, col) {
             return ep_pair;
         }
         ep = bp[pos_in_rand[i][0]][pos_in_rand[i][1]];
-        ep_dir = position_in_random(8,1);
-        for (var j=0; j<8 && !ep.is_ep; ++j) {
+        ep_dir = position_in_random(dir.length,1);
+        for (var j=0; j<dir.length && !ep.is_ep; ++j) {
             step = dir[ep_dir[j][0]];
             next_ep_row = ep.pos[0]+step[0];
             next_ep_col = ep.pos[1]+step[1]; 
@@ -148,6 +148,7 @@ function get_endpoint_pair(row, col) {
             break;
         }
     }
+    return ep_pair;
 }
   
 /** 
@@ -169,12 +170,10 @@ function getPointByPos(pos) {
 }
 
 function recTrace(ep, ang) {
-    per_x = default_settings.width/default_settings.num_of_col;
-    per_y = default_settings.height/default_settings.num_of_row;
-    max_x = (ep.pos[1]+1)*per_x;
-    min_x = ep.pos[1]*per_x;
-    max_y = (ep.pos[0]+1)*per_y; 
-    min_y = ep.pos[0]*per_y;
+    var max_x = (ep.pos[0]+1)*per_x;
+    var min_x = ep.pos[0]*per_x;
+    var max_y = (ep.pos[1]+1)*per_y; 
+    var min_y = ep.pos[1]*per_y;
     ep.x += ep.vv*Math.cos(ang);
     ep.y += ep.vv*Math.sin(ang);
     ep.z += ep.vc;
